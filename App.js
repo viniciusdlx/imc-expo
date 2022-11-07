@@ -1,19 +1,17 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
+import { React, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, SafeAreaView, TextInput  } from 'react-native';
 
 export default function App() {
-  const [peso, setPeso] = React.useState("");
-  const [altura, setAltura] = React.useState("");
-  const [imc, setImc] = React.useState(0);
-  const [result, setResult] = React.useState("");
+  const [peso, setPeso] = useState(1);
+  const [altura, setAltura] = useState(1);
+  const [imc, setImc] = useState(0);
+  const [result, setResult] = useState("");
 
-  const handleCalculateIMC = async () => {
-    setImc(peso / (altura * altura))
-    handleTextResult()
-  }
+  const handleCalculateIMC = () => {
+    const imc = peso / (altura * altura);
 
-  const handleTextResult = () => {
+    console.log('imc -> ', imc)
+
     if(imc >= 40){
       setResult("OBESIDADE GRAU III (Mórbida)")
     }
@@ -35,6 +33,8 @@ export default function App() {
     if(imc >= 16 && imc < 17){
       setResult("MAGREZA GRAVE")
     }
+
+    setImc(imc)
   }
 
 
@@ -81,12 +81,12 @@ const styles = StyleSheet.create({
     width: '80%', 
     alignItems: 'center', 
     padding: 4, 
-    margin: '8px 0px', 
+    // margin: '8px 0px', 
     borderRadius: 4
   },
   input: {
     height: 40,
-    margin: '8px 0px',
+    // margin: '8px 0px',
     borderWidth: 1,
     padding: 10,
     borderColor: '#FEB6C4'
