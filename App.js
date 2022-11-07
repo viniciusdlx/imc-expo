@@ -5,13 +5,38 @@ import { StyleSheet, Text, TouchableOpacity, View, SafeAreaView, TextInput  } fr
 export default function App() {
   const [peso, setPeso] = React.useState("");
   const [altura, setAltura] = React.useState("");
-  const [result, setResult] = React.useState(0);
-  const [imc, setImc] = React.useState();
+  const [imc, setImc] = React.useState(0);
+  const [result, setResult] = React.useState("");
 
-  function handleCalculateIMC(){
-    // alert('Hello World!')
-    alert(altura)
+  const handleCalculateIMC = async () => {
+    setImc(peso / (altura * altura))
+    handleTextResult()
   }
+
+  const handleTextResult = () => {
+    if(imc >= 40){
+      setResult("OBESIDADE GRAU III (Mórbida)")
+    }
+    if(imc >= 35){
+      setResult("OBESIDADE GRAU II (Severa)")
+    }
+    if(imc >= 30 && imc < 35){
+      setResult("OBESIDADE GRAU I")
+    }
+    if(imc >= 25 && imc < 30){
+      setResult("SAUDÁVEL")
+    }
+    if(imc >= 18.5 && imc < 25){
+      setResult("MAGREZA LEVE")
+    }
+    if(imc >= 17 && imc < 18.5){
+      setResult("MAGREZA MODERADA")
+    }
+    if(imc >= 16 && imc < 17){
+      setResult("MAGREZA GRAVE")
+    }
+  }
+
 
   return (
     
@@ -38,8 +63,8 @@ export default function App() {
         <Text style={{ fontSize: 16, color: '#000' }}>CALCULAR IMC</Text>
       </TouchableOpacity>
 
-      <Text>O seu IMC é: {parseFloat(result).toFixed(3)}</Text>
-      <Text> voce tem: {imc}</Text>
+      <Text>O seu IMC é: {parseFloat(imc).toFixed(2)}</Text>
+      <Text>Você tem: {result}</Text>
     </View>
   );
 }
@@ -64,5 +89,6 @@ const styles = StyleSheet.create({
     margin: '8px 0px',
     borderWidth: 1,
     padding: 10,
+    borderColor: '#FEB6C4'
   },
 });
